@@ -4,10 +4,8 @@ from typing import List
 import requests
 import datetime
 
-# FastAPI app initialization
 app = FastAPI()
 
-# Configuration
 PAGERDUTY_API_TOKEN = "YOUR_API_TOKEN"  # Replace with your PagerDuty API token
 PAGERDUTY_API_BASE_URL = "https://api.pagerduty.com"
 MAINTENANCE_WINDOW_DESCRIPTION = "Scheduled maintenance window"
@@ -20,7 +18,7 @@ class MaintenanceWindowCreateRequest(BaseModel):
 class MaintenanceWindowDeleteRequest(BaseModel):
     maintenance_window_id: str
 
-# Helper Functions
+
 def create_maintenance_window(service_ids: List[str], duration_minutes: int):
     if duration_minutes > 30:
         raise HTTPException(status_code=400, detail="Duration cannot exceed 30 minutes.")
@@ -64,7 +62,7 @@ def delete_maintenance_window(maintenance_window_id: str):
     else:
         raise HTTPException(status_code=response.status_code, detail=response.text)
 
-# FastAPI Endpoints
+# FastAPI create maintenance window
 @app.post("/create-maintenance-window")
 async def create_window(request: MaintenanceWindowCreateRequest, user_email: str = Query(..., description="User email is mandatory")):
     """
@@ -80,6 +78,7 @@ async def create_window(request: MaintenanceWindowCreateRequest, user_email: str
     except HTTPException as e:
         raise e
 
+# FastAPI create maintenance window
 @app.delete("/delete-maintenance-window")
 async def delete_window(request: MaintenanceWindowDeleteRequest, user_email: str = Query(..., description="User email is mandatory")):
     """
