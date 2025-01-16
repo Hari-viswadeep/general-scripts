@@ -1,6 +1,7 @@
 
 
 POST /create-maintenance-window: Accepts service IDs and duration (max 30 minutes) to create a maintenance window.
+
 DELETE /delete-maintenance-window: Deletes a maintenance window using its ID.
 
 
