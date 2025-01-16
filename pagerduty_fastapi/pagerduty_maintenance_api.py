@@ -78,7 +78,7 @@ async def create_window(request: MaintenanceWindowCreateRequest, user_email: str
     except HTTPException as e:
         raise e
 
-# FastAPI create maintenance window
+# FastAPI delete maintenance window
 @app.delete("/delete-maintenance-window")
 async def delete_window(request: MaintenanceWindowDeleteRequest, user_email: str = Query(..., description="User email is mandatory")):
     """
